@@ -6,12 +6,12 @@
         <span class="logout" v-if="loggedIn" @click="logout">Log out</span>
         <router-link v-if="!loggedIn" to="/login">Log in</router-link>
       </li>
-      <li>
+      <!-- <li>
         <router-link to="/about">About</router-link>
       </li>
       <li>
         <router-link to="/dashboard">Dashboard</router-link>
-      </li>
+      </li> -->
     </ul>
     <template v-if="$route.matched.length">
       <router-view></router-view>

@@ -24,6 +24,7 @@
                 <span class="md-error" v-if="!$v.form.email.required">Password is required</span>
                 <!-- <span class="md-error" v-else-if="!$v.form.password.password">Invalid password</span> -->
               </md-field>
+              <div class="md-error" v-if="authStatus === 'error'">Invalid login</div>
             </md-card-content>
 
             <md-progress-bar md-mode="indeterminate" v-if="sending" />
@@ -40,6 +41,7 @@
 </template>
 
 <script>
+  import store from '@/store'
   import {AUTH_REQUEST} from '@/store/actions/auth'
   import { validationMixin } from 'vuelidate'
   import {
@@ -90,6 +92,10 @@
         this.$store.dispatch(AUTH_REQUEST, { username: email, password }).then(() => {
           this.$router.push('/')
         })
+        .catch((err) => {})
+        .finally(() => {
+          this.sending = false
+        })
       },
       validateLogin: function() {
         this.$v.$touch()
@@ -98,5 +104,10 @@
           }
       }
     },
+    computed: {
+      authStatus() {
+        return store.getters.authStatus
+      }
+    }
   }
 </script>

@@ -29,7 +29,7 @@ import { AUTH_LOGOUT } from '@/store/actions/auth'
 export default {
   computed: {
     loggedIn() {
-      return store.getters.isAuthenticated;
+      return store.getters.isAuthenticated
     }
   },
   methods: {

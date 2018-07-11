@@ -43,14 +43,3 @@ export default new Router({
     }
   ]
 })
-
-function requireAuth (to, from, next) {
-  if (!auth.loggedIn()) {
-    next({
-      path: '/login',
-      query: { redirect: to.fullPath }
-    })
-  } else {
-    next()
-  }
-}

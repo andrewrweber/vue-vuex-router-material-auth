@@ -11,7 +11,6 @@
       </li>
       <li>
         <router-link to="/dashboard">Dashboard</router-link>
-        (authenticated)
       </li>
     </ul>
     <template v-if="$route.matched.length">
@@ -28,9 +27,9 @@ import store from './store'
 import { AUTH_LOGOUT } from '@/store/actions/auth'
 
 export default {
-  data () {
-    return {
-      loggedIn: store.getters.isAuthenticated
+  computed: {
+    loggedIn() {
+      return store.getters.isAuthenticated;
     }
   },
   methods: {

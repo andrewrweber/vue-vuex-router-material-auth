@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="md-layout md-gutter md-alignment-center-center">
+    <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item md-size-25">
 
         <form novalidate class="md-layout" @submit.prevent="validateLogin">
@@ -22,7 +22,6 @@
                 <label for="password">Password</label>
                 <md-input type="password" name="password" id="password" autocomplete="Password" v-model="form.password" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.email.required">Password is required</span>
-                <!-- <span class="md-error" v-else-if="!$v.form.password.password">Invalid password</span> -->
               </md-field>
               <div class="md-error" v-if="authStatus === 'error'">Invalid login</div>
             </md-card-content>
@@ -90,7 +89,7 @@
         const { email, password } = this.form
         this.sending = true
         this.$store.dispatch(AUTH_REQUEST, { username: email, password }).then(() => {
-          this.$router.push('/')
+          this.$router.push('/dashboard')
         })
         .catch((err) => {})
         .finally(() => {

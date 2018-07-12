@@ -1,40 +1,37 @@
 <template>
-  <div>
+  <div class="login md-layout md-alignment-top-center">
+    <div class="md-layout-item md-size-35">
 
-    <div class="md-layout md-alignment-center-center">
-      <div class="md-layout-item md-size-35">
+      <form novalidate class="md-layout" @submit.prevent="validateLogin">
+        <md-card class="md-layout-item">
+          <md-card-header>
+            <div class="md-title">Welcome Back!</div>
+          </md-card-header>
 
-        <form novalidate class="md-layout" @submit.prevent="validateLogin">
-          <md-card class="md-layout-item">
-            <md-card-header>
-              <div class="md-title">Welcome Back!</div>
-            </md-card-header>
+          <md-card-content>
+            <md-field :class="getValidationClass('email')">
+              <label for="email">Email</label>
+              <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
+              <span class="md-error" v-if="!$v.form.email.required">Email is required</span>
+              <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+            </md-field>
 
-            <md-card-content>
-              <md-field :class="getValidationClass('email')">
-                <label for="email">Email</label>
-                <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.email.required">Email is required</span>
-                <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
-              </md-field>
+            <md-field :class="getValidationClass('password')">
+              <label for="password">Password</label>
+              <md-input type="password" name="password" id="password" autocomplete="Password" v-model="form.password" :disabled="sending" />
+              <span class="md-error" v-if="!$v.form.email.required">Password is required</span>
+            </md-field>
+            <div class="md-error" v-if="authStatus === 'error'">Invalid login</div>
+          </md-card-content>
 
-              <md-field :class="getValidationClass('password')">
-                <label for="password">Password</label>
-                <md-input type="password" name="password" id="password" autocomplete="Password" v-model="form.password" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.email.required">Password is required</span>
-              </md-field>
-              <div class="md-error" v-if="authStatus === 'error'">Invalid login</div>
-            </md-card-content>
+          <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
-            <md-progress-bar md-mode="indeterminate" v-if="sending" />
+          <md-card-actions>
+            <md-button type="submit" class="md-primary" :disabled="sending">Login</md-button>
+          </md-card-actions>
+        </md-card>
 
-            <md-card-actions>
-              <md-button type="submit" class="md-primary" :disabled="sending">Login</md-button>
-            </md-card-actions>
-          </md-card>
-
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -110,3 +107,10 @@
     }
   }
 </script>
+
+<style>
+  .login {
+    height: 100%;
+    padding-top: 35px;
+  }
+</style>

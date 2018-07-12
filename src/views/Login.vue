@@ -2,7 +2,7 @@
   <div>
 
     <div class="md-layout md-alignment-center-center">
-      <div class="md-layout-item md-size-25">
+      <div class="md-layout-item md-size-35">
 
         <form novalidate class="md-layout" @submit.prevent="validateLogin">
           <md-card class="md-layout-item">

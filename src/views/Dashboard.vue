@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h2>Dashboard</h2>
-    <p>Yay you made it!</p>
-  </div>
+  <md-content>
+    <div>Yay you made it!</div>
+  </md-content>
 </template>

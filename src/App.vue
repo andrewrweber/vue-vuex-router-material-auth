@@ -1,48 +1,33 @@
 <template>
-  <div class="page-container">
-    <md-app id="app">
-      <md-app-toolbar class="md-primary" md-elevation="1">
-        <h3 class="md-title" style="flex: 1">App Title</h3>
+  <div class="app-container">
 
-        <router-link v-if="!loggedIn" to="/login">
-          <md-button class="md-primary">
-            Log In
-          </md-button>
-        </router-link>
+    <top-navbar />
+    <left-drawer />
 
-        <md-button v-if="loggedIn" class="md-primary" @click="logout">
-          Log Out
-        </md-button>
-
-      </md-app-toolbar>
-
-      <md-app-content id="content">
-        <template v-if="$route.matched.length">
-          <router-view></router-view>
-        </template>
-      </md-app-content>
-    </md-app>
+    <md-content id="content">
+      <template v-if="$route.matched.length">
+        <router-view></router-view>
+      </template>
+    </md-content>
   </div>
 </template>
 
 <script>
-import store from '@/store'
-import { AUTH_LOGOUT } from '@/store/actions/auth'
+import TopNavbar from '@/components/topNavbar.vue'
+import LeftDrawer from '@/components/leftDrawer.vue'
 
 export default {
-  computed: {
-    loggedIn() {
-      return store.getters.isAuthenticated
-    }
-  },
-  methods: {
-    logout: function () {
-      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push('/login'))
-    }
+  components: {
+    TopNavbar,
+    LeftDrawer
   }
 }
 </script>
 
 <style>
-  html, body, .page-container, #app { height: 100%; }
+  html, body, .app-container { height: 100%; }
+
+  #content {
+    height: calc(100% - 64px);
+  }
 </style>
